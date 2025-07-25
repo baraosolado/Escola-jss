@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 import { User } from "./entity/User";
 
+
 export const AppDataSource = new DataSource({
     type: "mysql",
     host: "localhost",
@@ -15,3 +16,11 @@ export const AppDataSource = new DataSource({
     subscribers: [],
     migrations: [__dirname + "/migration/*.js"],
 });
+
+AppDataSource.initialize()
+.then(() => {
+    console.log("Conexão com o banco de dados realizada com sucesso!");
+
+}).catch((error) => {
+    console.log("Erro na conexão com o banco de dados:", error);
+})

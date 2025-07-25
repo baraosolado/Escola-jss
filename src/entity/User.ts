@@ -6,14 +6,14 @@ export class User {
     id!: number
 
     @Column()
-    Name!: string
+    name!: string
 
-    @Column()
+    @Column({ unique: true })
     email!: string
 
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
-    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP"  })
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
     updatedAt!: Date;
 }

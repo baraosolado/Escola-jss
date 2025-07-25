@@ -1,16 +1,20 @@
-import express, {Request, Response} from "express";
-import { AppDataSource } from "./data-source";
+import express, { Request, Response } from "express";
 import { error } from "console";
+// importar o arquivo de configuração do banco de dados
+import { AppDataSource } from "./data-source";
 
+
+// Criar a aplicaçao express
 const app = express();
 
-AppDataSource.initialize()
-.then(() =>{
-    console.log("Conexão com o banco de dados realizada com sucesso!");
+// Cria o middleware para analisar o corpo da requisição como JSON
+app.use(express.json());
+// Incluir as controllers
+import UsersController from "./controllers/UserControllers";
 
-}).catch((error) => {
-    console.log("Erro na conexão com o banco de dados:", error);
-})
+
+app.use('/', UsersController);
+
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Bem-vindo SolandoX9")
